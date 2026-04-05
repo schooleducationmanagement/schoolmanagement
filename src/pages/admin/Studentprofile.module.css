@@ -1,0 +1,278 @@
+.page {
+    max-width: 960px;
+}
+
+/* ── Header card ── */
+.headerCard {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 22px 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 16px;
+}
+
+.avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: #4f46e5;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.headerInfo {
+    flex: 1;
+}
+
+.studentName {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+.studentId {
+    font-size: 0.78rem;
+    color: #6b7280;
+    font-family: monospace;
+    margin-top: 2px;
+}
+
+.headerMeta {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+
+.headerActions {
+    flex-shrink: 0;
+}
+
+/* ── Grid ── */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+/* ── Card ── */
+.card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 18px 20px;
+}
+
+.feeCard {
+    grid-column: 1 / -1;
+}
+
+.cardTitle {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #374151;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.cardHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.cardHeader .cardTitle {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+/* ── Detail list ── */
+.detailList {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.detailRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #f9fafb;
+    font-size: 0.855rem;
+}
+
+.detailRow:last-child {
+    border-bottom: none;
+}
+
+.detailLabel {
+    color: #6b7280;
+    font-size: 0.82rem;
+}
+
+.noData {
+    font-size: 0.84rem;
+    color: #9ca3af;
+    padding: 8px 0;
+}
+
+/* ── Attendance ── */
+.attPct {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.attBar {
+    height: 6px;
+    background: #f3f4f6;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 14px;
+}
+
+.attBarFill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.4s ease;
+}
+
+.attStats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    text-align: center;
+}
+
+.attStat {
+    background: #f9fafb;
+    border: 1px solid #f3f4f6;
+    border-radius: 8px;
+    padding: 10px 8px;
+}
+
+.attStatVal {
+    font-size: 1.3rem;
+    font-weight: 700;
+    display: block;
+}
+
+.attStatLabel {
+    font-size: 0.68rem;
+    color: #9ca3af;
+    margin-top: 2px;
+    display: block;
+}
+
+/* ── Fee ── */
+.feeStats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.feeStat {
+    background: #f9fafb;
+    border: 1px solid #f3f4f6;
+    border-radius: 9px;
+    padding: 12px 14px;
+}
+
+.feeStatLabel {
+    font-size: 0.72rem;
+    color: #6b7280;
+    margin-bottom: 4px;
+}
+
+.feeStatVal {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+.feeBar {
+    height: 6px;
+    background: #f3f4f6;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.feeBarFill {
+    height: 100%;
+    background: #4f46e5;
+    border-radius: 3px;
+}
+
+.payHistory {
+    margin-top: 4px;
+}
+
+.payHistoryTitle {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+/* ── Payment modal ── */
+.payBalance {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.84rem;
+    color: #374151;
+    margin-bottom: 14px;
+}
+
+/* ══ Responsive ══ */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    .feeCard {
+        grid-column: 1;
+    }
+    .headerCard {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    .headerActions {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .attStats,
+    .feeStats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .headerCard {
+        padding: 16px;
+    }
+    .card {
+        padding: 14px 16px;
+    }
+    .detailRow {
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+}

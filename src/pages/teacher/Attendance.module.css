@@ -1,0 +1,246 @@
+.controls {
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+/* Slot info bar */
+.slotInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 11px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.slotInfoLeft {}
+
+.slotName {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fef3c7;
+}
+
+.slotMeta {
+    font-size: 0.76rem;
+    color: #6b7280;
+    margin-top: 2px;
+}
+
+.stats {
+    display: flex;
+    gap: 16px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.statVal {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.statLabel {
+    display: block;
+    font-size: 0.68rem;
+    color: #6b7280;
+    margin-top: 2px;
+}
+
+/* Bulk actions */
+.bulkActions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.bulkLabel {
+    font-size: 0.78rem;
+    color: #6b7280;
+}
+
+.bulkBtn {
+    padding: 5px 14px;
+    background: transparent;
+    border: 1px solid;
+    border-radius: 7px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: opacity 0.14s;
+}
+
+.bulkBtn:hover {
+    opacity: 0.8;
+}
+
+/* Student list */
+.studentList {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 18px;
+}
+
+.studentRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #1f2937;
+    border: 1.5px solid #374151;
+    border-radius: 10px;
+    padding: 12px 16px;
+    gap: 12px;
+    transition: border-color 0.12s;
+}
+
+.row_P {
+    border-color: rgba(16, 185, 129, 0.35);
+}
+
+.row_A {
+    border-color: rgba(239, 68, 68, 0.35);
+}
+
+.row_L {
+    border-color: rgba(245, 158, 11, 0.35);
+}
+
+.studentLeft {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+}
+
+.rollNo {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: #111827;
+    border: 1px solid #374151;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #9ca3af;
+    flex-shrink: 0;
+}
+
+.studentName {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #fef3c7;
+}
+
+.studentId {
+    font-size: 0.7rem;
+    color: #6b7280;
+    font-family: monospace;
+    margin-top: 1px;
+}
+
+/* Status buttons */
+.statusBtns {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.statusBtn {
+    padding: 6px 14px;
+    background: #111827;
+    color: #6b7280;
+    border: 1.5px solid #374151;
+    border-radius: 7px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.12s;
+}
+
+.statusBtn:hover {
+    border-color: #6b7280;
+    color: #9ca3af;
+}
+
+.active_P {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: #10b981;
+    color: #10b981;
+    font-weight: 700;
+}
+
+.active_A {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: #ef4444;
+    color: #ef4444;
+    font-weight: 700;
+}
+
+.active_L {
+    background: rgba(245, 158, 11, 0.15);
+    border-color: #f59e0b;
+    color: #f59e0b;
+    font-weight: 700;
+}
+
+/* Save row */
+.saveRow {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* ══ Responsive ══ */
+@media (max-width: 768px) {
+    .slotInfo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .stats {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .studentRow {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px;
+    }
+    .statusBtns {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    .statusBtn {
+        flex: 1;
+        text-align: center;
+        padding: 6px 8px;
+        font-size: 0.76rem;
+    }
+    .bulkActions {
+        gap: 6px;
+    }
+    .bulkBtn {
+        font-size: 0.76rem;
+        padding: 5px 10px;
+    }
+}

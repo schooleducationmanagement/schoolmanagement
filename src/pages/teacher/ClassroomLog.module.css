@@ -1,0 +1,147 @@
+.controls {
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.slotBanner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(245, 158, 11, 0.08);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    border-radius: 9px;
+    padding: 10px 16px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.bannerSubject {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #f59e0b;
+}
+
+.bannerDivider {
+    color: #374151;
+}
+
+.bannerClass,
+.bannerPeriod {
+    font-size: 0.84rem;
+    color: #9ca3af;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.section {
+    background: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 12px;
+    padding: 18px 20px;
+}
+
+.sectionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.sectionTitle {
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 14px;
+}
+
+.sectionHeader .sectionTitle {
+    margin-bottom: 0;
+}
+
+.grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* Homework */
+.addHwBtn {
+    padding: 5px 12px;
+    background: transparent;
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    border-radius: 7px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.14s;
+}
+
+.addHwBtn:hover {
+    background: rgba(245, 158, 11, 0.1);
+}
+
+.hwRow {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: center;
+}
+
+.removeHwBtn {
+    width: 30px;
+    height: 30px;
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: inherit;
+}
+
+.removeHwBtn:hover {
+    background: rgba(239, 68, 68, 0.2);
+}
+
+.saveRow {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* ══ Responsive ══ */
+@media (max-width: 768px) {
+    .slotBanner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    .bannerDivider {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .grid2 {
+        grid-template-columns: 1fr;
+    }
+    .section {
+        padding: 14px 14px;
+    }
+    .hwRow {
+        flex-wrap: wrap;
+    }
+}

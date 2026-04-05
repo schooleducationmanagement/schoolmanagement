@@ -1,0 +1,60 @@
+.controls {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.filters {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.countRow {
+    margin-bottom: 10px;
+}
+
+.count {
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+.emptyState {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 64px 24px;
+    text-align: center;
+}
+
+.emptyIcon {
+    font-size: 2.5rem;
+    color: #e5e7eb;
+    margin-bottom: 10px;
+}
+
+.emptyText {
+    font-size: 0.9rem;
+    color: #9ca3af;
+}
+
+.studentName {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #111827;
+}
+
+.studentDob {
+    font-size: 0.72rem;
+    color: #9ca3af;
+    margin-top: 1px;
+}
+
+.parentRel {
+    font-size: 0.72rem;
+    color: #9ca3af;
+}

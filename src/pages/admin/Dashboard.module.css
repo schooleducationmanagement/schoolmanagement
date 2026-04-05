@@ -1,0 +1,203 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ── Stat cards ── */
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+}
+
+.statCard {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 18px 16px;
+    cursor: pointer;
+    transition: box-shadow 0.15s, transform 0.15s;
+    text-align: center;
+}
+
+.statCard:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.statIcon {
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+}
+
+.statVal {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1;
+}
+
+.statLabel {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+/* ── Card ── */
+.card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.cardHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.cardTitle {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+}
+
+.allDone {
+    font-size: 0.82rem;
+    color: #15803d;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 20px;
+    padding: 3px 10px;
+}
+
+/* ── Next step banner ── */
+.nextBanner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    background: #eef2ff;
+    border-bottom: 1px solid #e0e7ff;
+    font-size: 0.855rem;
+    color: #3730a3;
+}
+
+.nextBtn {
+    margin-left: auto;
+    padding: 5px 14px;
+    background: #4f46e5;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.nextBtn:hover {
+    background: #4338ca;
+}
+
+/* ── Steps ── */
+.steps {
+    padding: 8px 12px;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 10px;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: background 0.12s;
+    margin-bottom: 2px;
+}
+
+.step:hover {
+    background: #f9fafb;
+}
+
+.stepNum {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.stepDone .stepNum {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.stepPending .stepNum {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+.stepBody {
+    flex: 1;
+}
+
+.stepLabel {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #111827;
+}
+
+.stepDone .stepLabel {
+    color: #6b7280;
+    text-decoration: line-through;
+}
+
+.stepHint {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    margin-top: 1px;
+}
+
+.stepArrow {
+    font-size: 0.85rem;
+    color: #d1d5db;
+}
+
+.step:hover .stepArrow {
+    color: #4f46e5;
+}
+
+/* ══ Responsive ══ */
+@media (max-width: 768px) {
+    .statsGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .cardHeader {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .statsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .nextBanner {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .nextBtn {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+    }
+}

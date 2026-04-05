@@ -1,0 +1,375 @@
+/* ── Buttons ── */
+.btnPrimary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    background: #f59e0b;
+    color: #111827;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.855rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.14s;
+    font-family: inherit;
+}
+
+.btnPrimary:hover {
+    background: #d97706;
+}
+
+.btnPrimary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btnSecondary {
+    padding: 8px 16px;
+    background: transparent;
+    color: #f59e0b;
+    border: 1.5px solid #f59e0b;
+    border-radius: 8px;
+    font-size: 0.855rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.14s;
+    font-family: inherit;
+}
+
+.btnSecondary:hover {
+    background: rgba(245, 158, 11, 0.1);
+}
+
+.btnGhost {
+    padding: 7px 14px;
+    background: #1f2937;
+    color: #9ca3af;
+    border: 1px solid #374151;
+    border-radius: 8px;
+    font-size: 0.835rem;
+    cursor: pointer;
+    transition: all 0.14s;
+    font-family: inherit;
+}
+
+.btnGhost:hover {
+    border-color: #f59e0b;
+    color: #f59e0b;
+}
+
+.btnDanger {
+    padding: 6px 12px;
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    border-radius: 7px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.btnDanger:hover {
+    background: rgba(239, 68, 68, 0.2);
+}
+
+.btnSm {
+    padding: 5px 11px;
+    font-size: 0.78rem;
+}
+
+/* ── Form fields ── */
+.field {
+    margin-bottom: 12px;
+}
+
+.label {
+    display: block;
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: #9ca3af;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.input,
+.select,
+.textarea {
+    width: 100%;
+    padding: 9px 12px;
+    background: #111827;
+    border: 1.5px solid #374151;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: #fef3c7;
+    outline: none;
+    transition: border-color 0.14s;
+    font-family: inherit;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+    border-color: #f59e0b;
+}
+
+.input::placeholder {
+    color: #4b5563;
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* ── Card ── */
+.card {
+    background: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.cardPad {
+    padding: 18px 20px;
+}
+
+.cardTitle {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 14px;
+}
+
+/* ── Error / success ── */
+.error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: #ef4444;
+    font-size: 0.84rem;
+    margin-bottom: 14px;
+}
+
+.success {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: #10b981;
+    font-size: 0.84rem;
+    margin-bottom: 14px;
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+/* ── Badge ── */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.badgeAmber {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+}
+
+.badgeOrange {
+    background: rgba(234, 88, 12, 0.15);
+    color: #ea580c;
+}
+
+.badgeGreen {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+}
+
+.badgeRed {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+.badgeGray {
+    background: rgba(107, 114, 128, 0.2);
+    color: #9ca3af;
+}
+
+/* ── Modal ── */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(3px);
+}
+
+.modal {
+    background: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 14px;
+    padding: 26px 28px;
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.modalTitle {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fef3c7;
+    margin: 0 0 18px;
+}
+
+.modalFooter {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px solid #374151;
+}
+
+/* ── Table ── */
+.tableWrap {
+    background: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 12px;
+    overflow: hidden;
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table thead th {
+    background: #111827;
+    padding: 9px 14px;
+    text-align: left;
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #6b7280;
+    white-space: nowrap;
+}
+
+.table tbody tr {
+    border-top: 1px solid #374151;
+    transition: background 0.1s;
+}
+
+.table tbody tr:hover {
+    background: #273347;
+}
+
+.table td {
+    padding: 11px 14px;
+    font-size: 0.855rem;
+    color: #e5e7eb;
+    vertical-align: middle;
+}
+
+.actions {
+    display: flex;
+    gap: 6px;
+}
+
+/* ── Empty state ── */
+.empty {
+    text-align: center;
+    padding: 48px 20px;
+    color: #4b5563;
+}
+
+.emptyText {
+    font-size: 0.875rem;
+}
+
+/* ── Header row ── */
+.pageHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 12px;
+}
+
+.pageTitle {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fef3c7;
+    margin: 0;
+}
+
+.pageSub {
+    font-size: 0.78rem;
+    color: #6b7280;
+    margin-top: 2px;
+}
+
+/* ══ Responsive ══ */
+@media (max-width: 768px) {
+    .pageHeader {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .modal {
+        padding: 22px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .grid2 {
+        grid-template-columns: 1fr;
+    }
+    .pageHeader {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .modal {
+        padding: 16px 14px;
+        border-radius: 10px;
+    }
+    .modalFooter {
+        flex-direction: column-reverse;
+    }
+    .modalFooter button {
+        width: 100%;
+    }
+    .table thead th,
+    .table td {
+        padding: 8px 10px;
+        font-size: 0.82rem;
+    }
+    .chip,
+    .dateChip {
+        display: none;
+    }
+}
