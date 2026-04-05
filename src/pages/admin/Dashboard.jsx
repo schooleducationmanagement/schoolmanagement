@@ -140,6 +140,11 @@ export default function Dashboard() {
                     ))}
                 </div>
             </div>
+            <div>
+                <button onClick={() => window.location.href = "https://schoolmanagement-inky.vercel.app/teacher"}>
+                    Teacher Page
+                </button>
+            </div>
         </div>
     )
 }
