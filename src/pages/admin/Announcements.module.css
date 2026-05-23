@@ -1,0 +1,342 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px;
+    background: #fdfdfd;
+}
+
+/* ── Top Section (Hero + Calendar) ── */
+.topSection {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 25px;
+}
+
+/* ── Hero Card ── */
+.heroCard {
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.heroContent {
+    flex: 1;
+    max-width: 60%;
+}
+
+.heroSubtitle {
+    font-size: 0.9rem;
+    color: #4b5563;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.heroTitle {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 15px;
+}
+
+.heroDesc {
+    font-size: 1.1rem;
+    color: #6b7280;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.heroImageWrap {
+    width: 200px;
+    height: 200px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background: #fff;
+}
+
+.heroImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* ── Calendar Widget ── */
+.calendarWidget {
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.calendarHeader {
+    margin-bottom: 20px;
+}
+
+.calendarTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 4px;
+}
+
+/* Month row: plain label flanked by minimal nav buttons */
+.calendarMonthRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.calendarMonth {
+    font-size: 0.9rem;
+    color: #6b7280;
+    flex: 1;
+    text-align: center;
+}
+
+.navBtn {
+    background: none;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #374151;
+    line-height: 1;
+    transition: background 0.15s;
+}
+
+.navBtn:hover {
+    background: #f3f4f6;
+}
+
+.calendarGrid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    text-align: center;
+}
+
+.dayLabel {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #9ca3af;
+    padding-bottom: 10px;
+}
+
+/* Base day cell */
+.day {
+    font-size: 0.85rem;
+    color: #374151;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: background 0.15s, color 0.15s;
+    position: relative;
+}
+
+/* Empty leading cells */
+.dayEmpty {
+    cursor: default;
+}
+
+/* Sunday column */
+.daySun {
+    color: #ef4444;
+}
+
+/* Today (no announcement) */
+.dayToday {
+    border: 1.5px solid #d1d5db;
+    font-weight: 600;
+}
+
+/* Clickable days (have an announcement) */
+.dayClickable {
+    cursor: pointer;
+}
+
+.dayClickable:hover {
+    filter: brightness(0.92);
+}
+
+/* ── Announcement highlight styles ── */
+
+/* Has an announcement — light tint */
+.dayLight {
+    background: #eef2ff;
+    color: #4f46e5;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Clicked/selected — always dark */
+.daySelected {
+    background: #4f46e5;
+    color: #fff !important;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(79, 70, 229, 0.35);
+    font-weight: 600;
+}
+
+.calendarFooter {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    color: #6b7280;
+}
+
+.footerLine {
+    flex: 1;
+    height: 1px;
+    background: #e5e7eb;
+    margin: 0 10px;
+}
+
+/* ── Announcement List ── */
+.listSection {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.listHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.listTitle {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+.tableCard {
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.filterBar {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.monthSelect {
+    padding: 8px 15px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #374151;
+    outline: none;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    text-align: left;
+    padding: 12px 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #6b7280;
+    border-bottom: 1px solid #f3f4f6;
+    background: #fafafa;
+}
+
+.table td {
+    padding: 15px;
+    font-size: 0.9rem;
+    color: #374151;
+    border-bottom: 1px solid #f3f4f6;
+    vertical-align: middle;
+}
+
+.descCell {
+    max-width: 300px;
+    color: #6b7280;
+    font-size: 0.85rem;
+}
+
+.actions {
+    display: flex;
+    gap: 15px;
+}
+
+.actionBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: #6b7280;
+    transition: color 0.15s;
+}
+
+.viewBtn:hover {
+    color: #4f46e5;
+}
+
+.deleteBtn:hover {
+    color: #ef4444;
+}
+
+.pagination {
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pageInfo {
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+/* ══ Responsive ══ */
+@media (max-width: 1024px) {
+    .topSection {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .heroCard {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .heroContent {
+        max-width: 100%;
+    }
+
+    .heroIndicators {
+        justify-content: center;
+    }
+}

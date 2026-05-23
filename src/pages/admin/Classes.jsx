@@ -4,7 +4,7 @@ import s from '../../components/admin/PageShell.module.css'
 import cs from './Classes.module.css'
 
 const EMPTY_CLASS = { name: '', grade: '', section: '' }
-const EMPTY_SUBJECT = { name: '', short: '', icon: '' }
+const EMPTY_SUBJECT = { name: '' }
 
 export default function Classes() {
     const [classes, setClasses] = useState([])
@@ -79,15 +79,15 @@ export default function Classes() {
 
     function openAddSubject() { setSubForm(EMPTY_SUBJECT); setEditSubId(null); setError(null); setSubModal(true) }
     function openEditSubject(sub) {
-        setSubForm({ name: sub.name, short: sub.short, icon: sub.icon ?? '' })
+        setSubForm({ name: sub.name })
         setEditSubId(sub.id); setError(null); setSubModal(true)
     }
     function closeSubModal() { setSubModal(false); setError(null) }
 
     async function saveSubject() {
-        if (!subForm.name.trim() || !subForm.short.trim()) { setError('Name and short name required'); return }
+        if (!subForm.name.trim()) { setError('Name is required'); return }
         setSavingSub(true); setError(null)
-        const payload = { class_id: expandedId, name: subForm.name.trim(), short: subForm.short.trim(), icon: subForm.icon.trim() || null }
+        const payload = { class_id: expandedId, name: subForm.name.trim() }
         const { error } = editSubId
             ? await supabase.from('subjects').update(payload).eq('id', editSubId)
             : await supabase.from('subjects').insert(payload)
@@ -163,10 +163,9 @@ export default function Classes() {
                                                         <div className={cs.subGrid}>
                                                             {subjects.map(sub => (
                                                                 <div key={sub.id} className={cs.subCard}>
-                                                                    <div className={cs.subIcon}>{sub.icon ?? '📘'}</div>
+                                                                    <div className={cs.subIcon}>📘</div>
                                                                     <div className={cs.subBody}>
                                                                         <div className={cs.subName}>{sub.name}</div>
-                                                                        <div className={cs.subShort}>{sub.short}</div>
                                                                     </div>
                                                                     <div className={cs.subActions}>
                                                                         <button className={`${s.btnGhost} ${s.btnSm}`} onClick={() => openEditSubject(sub)}>✏️</button>
@@ -224,16 +223,6 @@ export default function Classes() {
                         <div className={s.field}>
                             <label className={s.label}>Subject Name</label>
                             <input className={s.input} value={subForm.name} onChange={e => setSubForm(f => ({ ...f, name: e.target.value }))} placeholder="e.g. Mathematics" />
-                        </div>
-                        <div className={s.grid2}>
-                            <div className={s.field}>
-                                <label className={s.label}>Short Name</label>
-                                <input className={s.input} value={subForm.short} onChange={e => setSubForm(f => ({ ...f, short: e.target.value }))} placeholder="e.g. Math" maxLength={8} />
-                            </div>
-                            <div className={s.field}>
-                                <label className={s.label}>Icon (emoji)</label>
-                                <input className={s.input} value={subForm.icon} onChange={e => setSubForm(f => ({ ...f, icon: e.target.value }))} placeholder="e.g. 📐" />
-                            </div>
                         </div>
                         <div className={s.modalFooter}>
                             <button className={s.btnGhost} onClick={closeSubModal}>Cancel</button>

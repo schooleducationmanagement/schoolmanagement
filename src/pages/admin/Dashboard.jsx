@@ -43,7 +43,7 @@ export default function Dashboard() {
             num: 2,
             label: 'Add subjects',
             done: counts.subjects > 0,
-            path: '/admin/subjects',
+            path: '/admin/classes',
             hint: 'e.g. Mathematics, Science, English',
         },
         {
@@ -74,7 +74,7 @@ export default function Dashboard() {
 
     const stats = [
         { label: 'Classes', value: counts.classes, icon: '🏫', path: '/admin/classes' },
-        { label: 'Subjects', value: counts.subjects, icon: '📚', path: '/admin/subjects' },
+        { label: 'Subjects', value: counts.subjects, icon: '📚', path: '/admin/classes' },
         { label: 'Teachers', value: counts.teachers, icon: '👨‍🏫', path: '/admin/teachers' },
         { label: 'Assignments', value: counts.assignments, icon: '🔗', path: '/admin/assignments' },
         { label: 'Slots', value: counts.slots, icon: '📅', path: '/admin/timetable' },

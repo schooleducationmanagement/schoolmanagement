@@ -9,6 +9,7 @@ import Settings from '../pages/admin/Settings'
 import Students from '../pages/admin/Students'
 import StudentForm from '../pages/admin/Studentform'
 import StudentProfile from '../pages/admin/Studentprofile'
+import Announcements from '../pages/admin/Announcements'
 
 
 export default function AdminRoutes() {
@@ -25,6 +26,7 @@ export default function AdminRoutes() {
                 <Route path="students/add" element={<StudentForm />} />
                 <Route path="students/:id" element={<StudentProfile />} />
                 <Route path="students/:id/edit" element={<StudentForm />} />
+                <Route path="announcements" element={<Announcements />} />
             </Route>
         </Routes>
     )

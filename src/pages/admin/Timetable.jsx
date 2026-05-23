@@ -66,10 +66,10 @@ export default function Timetable() {
 
         // fetch subjects, slots, and config in parallel
         const [subRes, slotRes] = await Promise.all([
-            supabase.from('subjects').select('id, name, short').eq('class_id', id).order('name'),
+            supabase.from('subjects').select('id, name').eq('class_id', id).order('name'),
             supabase
                 .from('timetable_slots')
-                .select('id, day, period, subject_id, teacher_id, is_published, subjects(name, short), teachers(name)')
+                .select('id, day, period, subject_id, teacher_id, is_published, subjects(name), teachers(name)')
                 .eq('class_id', id),
         ])
 
@@ -352,7 +352,7 @@ export default function Timetable() {
                                                             {slot ? (
                                                                 <>
                                                                     <div className={t.cellSubject}>
-                                                                        {slot.subjects?.short ?? slot.subjects?.name}
+                                                                        {slot.subjects?.name}
                                                                     </div>
                                                                     <div className={t.cellTeacher}>
                                                                         {slot.teachers?.name}

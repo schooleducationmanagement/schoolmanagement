@@ -4,7 +4,7 @@ import s from './TopBar.module.css'
 const pageMeta = {
     '/admin': { crumb: 'Overview', title: 'Dashboard' },
     '/admin/classes': { crumb: 'Setup', title: 'Classes' },
-    '/admin/subjects': { crumb: 'Setup', title: 'Subjects' },
+    '/admin/announcements': { crumb: 'Communication', title: 'Announcements' },
     '/admin/teachers': { crumb: 'Setup', title: 'Teachers' },
     '/admin/assignments': { crumb: 'Setup', title: 'Teacher Assignments' },
     '/admin/timetable': { crumb: 'Timetable', title: 'Timetable Builder' },

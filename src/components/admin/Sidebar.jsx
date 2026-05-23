@@ -6,27 +6,28 @@ const links = [
         section: 'Overview',
         items: [
             { to: '/admin', label: 'Dashboard', icon: '⊞' },
+            { to: '/admin/announcements', label: 'Announcements', icon: '📢' },
         ],
     },
     {
         section: 'Setup',
         items: [
             { to: '/admin/classes', label: 'Classes & Subjects', icon: '🎓' },
-            { to: '/admin/teachers', label: 'Teachers', icon: '👤' },
-            { to: '/admin/assignments', label: 'Assignments', icon: '📋' },
+            { to: '/admin/teachers', label: 'Create Teachers', icon: '👤' },
+            { to: '/admin/assignments', label: 'Teachers Assignments', icon: '📋' },
         ],
     },
     {
         section: 'Students',
         items: [
-            { to: '/admin/students', label: 'All Students', icon: '👥' },
+            { to: '/admin/students', label: 'Students', icon: '👥' },
         ],
     },
     {
         section: 'Timetable',
         items: [
-            { to: '/admin/settings', label: 'Schedule Settings', icon: '⚙️' },
-            { to: '/admin/timetable', label: 'Timetable Builder', icon: '📅' },
+            { to: '/admin/settings', label: 'Create Timetable', icon: '⚙️' },
+            { to: '/admin/timetable', label: 'Assign Timetable', icon: '📅' },
         ],
     },
 ]
