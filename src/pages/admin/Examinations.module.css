@@ -1,0 +1,367 @@
+.page {
+    padding: 32px;
+    max-width: 1100px;
+}
+
+/* ── Header ── */
+.header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #111;
+    margin: 0 0 4px;
+}
+
+.subtitle {
+    font-size: 13px;
+    color: #888;
+    margin: 0;
+}
+
+/* ── Tabs ── */
+.tabs {
+    display: flex;
+    gap: 4px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #666;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color 0.15s;
+    margin-bottom: -1px;
+}
+
+.tab:hover {
+    color: #333;
+}
+
+.tabActive {
+    color: #2563eb;
+    border-bottom-color: #2563eb;
+}
+
+.tabCount {
+    background: #f0f0f0;
+    color: #666;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 10px;
+    min-width: 18px;
+    text-align: center;
+}
+
+.tabActive .tabCount {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+/* ── Table ── */
+.tableWrap {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.table thead {
+    background: #fafafa;
+}
+
+.table thead th {
+    padding: 11px 16px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid #eee;
+}
+
+.table tbody td {
+    padding: 14px 16px;
+    color: #333;
+    border-bottom: 1px solid #f5f5f5;
+    vertical-align: middle;
+}
+
+.row:last-child td {
+    border-bottom: none;
+}
+
+.row:hover td {
+    background: #fafafa;
+}
+
+.examName {
+    font-weight: 500;
+    color: #111 !important;
+}
+
+.typeTag {
+    color: #555 !important;
+    font-size: 13px;
+}
+
+/* ── Status badges ── */
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.statusDraft {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+.statusScheduled {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.statusOngoing {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.statusMarksEntry {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.statusCompleted {
+    background: #ede9fe;
+    color: #5b21b6;
+}
+
+.statusLocked {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+/* ── Actions ── */
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btnView {
+    padding: 5px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #2563eb;
+    background: #eff6ff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.btnView:hover {
+    background: #dbeafe;
+}
+
+.btnDelete {
+    padding: 5px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #dc2626;
+    background: #fff0f0;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btnDelete:hover {
+    background: #fee2e2;
+}
+
+/* ── Primary button ── */
+.btnPrimary {
+    padding: 9px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: #2563eb;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.btnPrimary:hover {
+    background: #1d4ed8;
+}
+
+.btnPrimary:disabled {
+    background: #93c5fd;
+    cursor: not-allowed;
+}
+
+.btnCancel {
+    padding: 9px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+    background: #f3f4f6;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btnCancel:hover {
+    background: #e5e7eb;
+}
+
+.btnDanger {
+    padding: 9px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: #dc2626;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btnDanger:hover {
+    background: #b91c1c;
+}
+
+/* ── Empty state ── */
+.empty {
+    padding: 48px;
+    text-align: center;
+    color: #aaa;
+    font-size: 14px;
+}
+
+/* ── Modal ── */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: #fff;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 480px;
+    padding: 28px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.modalHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.modalHeader h2 {
+    font-size: 17px;
+    font-weight: 600;
+    color: #111;
+    margin: 0;
+}
+
+.close {
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: #aaa;
+    cursor: pointer;
+    padding: 2px 6px;
+}
+
+.close:hover {
+    color: #555;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.field label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #444;
+}
+
+.field input,
+.field select {
+    padding: 9px 12px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    color: #111;
+    background: #fff;
+    transition: border-color 0.15s;
+}
+
+.field input:focus,
+.field select:focus {
+    border-color: #2563eb;
+}
+
+.fieldRow {
+    display: flex;
+    gap: 12px;
+}
+
+.modalFooter {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+.deleteMsg {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}

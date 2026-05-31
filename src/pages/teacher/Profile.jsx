@@ -10,6 +10,12 @@ export default function TeacherProfile() {
     const [slotCount, setSlotCount] = useState(0)
     const [loading, setLoading] = useState(true)
 
+    // Password change state
+    const [passForm, setPassForm] = useState({ old: '', new: '', confirm: '' })
+    const [passError, setPassError] = useState(null)
+    const [passSuccess, setPassSuccess] = useState(null)
+    const [passSaving, setPassSaving] = useState(false)
+
     useEffect(() => {
         if (teacher?.id) loadData()
     }, [teacher])
@@ -20,7 +26,7 @@ export default function TeacherProfile() {
             // subjects this teacher teaches (via teacher_subjects)
             supabase
                 .from('teacher_subjects')
-                .select('subjects ( id, name, short, icon, classes ( name ) )')
+                .select('subjects ( id, name, classes ( name ) )')
                 .eq('teacher_id', teacher.id),
             // total timetable slots
             supabase
@@ -31,6 +37,52 @@ export default function TeacherProfile() {
         setSubjects(subRes.data?.map(r => r.subjects) ?? [])
         setSlotCount(slotRes.count ?? 0)
         setLoading(false)
+    }
+
+    async function handleChangePassword() {
+        setPassError(null)
+        setPassSuccess(null)
+
+        if (!passForm.old || !passForm.new || !passForm.confirm) {
+            setPassError('All fields are required')
+            return
+        }
+        if (passForm.new !== passForm.confirm) {
+            setPassError('New passwords do not match')
+            return
+        }
+        if (passForm.new.length < 4) {
+            setPassError('Password must be at least 4 characters')
+            return
+        }
+
+        setPassSaving(true)
+        // 1. Verify old password
+        const { data, error: fetchErr } = await supabase
+            .from('teachers')
+            .select('password')
+            .eq('id', teacher.id)
+            .single()
+
+        if (fetchErr || data.password !== passForm.old) {
+            setPassSaving(false)
+            setPassError('Current password is incorrect')
+            return
+        }
+
+        // 2. Update password
+        const { error: updateErr } = await supabase
+            .from('teachers')
+            .update({ password: passForm.new })
+            .eq('id', teacher.id)
+
+        setPassSaving(false)
+        if (updateErr) {
+            setPassError(updateErr.message)
+        } else {
+            setPassSuccess('Password updated successfully!')
+            setPassForm({ old: '', new: '', confirm: '' })
+        }
     }
 
     const initials = teacher?.name
@@ -106,6 +158,56 @@ export default function TeacherProfile() {
                             ))}
                         </div>
                     )}
+                </div>
+
+                {/* Security Section */}
+                <div className={cs.card}>
+                    <div className={s.cardTitle}>Security Settings</div>
+                    <div className={cs.passForm}>
+                        <p className={cs.passHint}>Ensure your account is secure by using a strong password.</p>
+                        
+                        {passError && <div className={cs.passError}>{passError}</div>}
+                        {passSuccess && <div className={cs.passSuccess}>{passSuccess}</div>}
+
+                        <div className={cs.passField}>
+                            <label className={cs.passLabel}>Current Password</label>
+                            <input 
+                                type="password" 
+                                className={cs.passInput}
+                                value={passForm.old}
+                                onChange={e => setPassForm({...passForm, old: e.target.value})}
+                                placeholder="••••••••"
+                            />
+                        </div>
+                        <div className={cs.passField}>
+                            <label className={cs.passLabel}>New Password</label>
+                            <input 
+                                type="password" 
+                                className={cs.passInput}
+                                value={passForm.new}
+                                onChange={e => setPassForm({...passForm, new: e.target.value})}
+                                placeholder="••••••••"
+                            />
+                        </div>
+                        <div className={cs.passField}>
+                            <label className={cs.passLabel}>Confirm New Password</label>
+                            <input 
+                                type="password" 
+                                className={cs.passInput}
+                                value={passForm.confirm}
+                                onChange={e => setPassForm({...passForm, confirm: e.target.value})}
+                                placeholder="••••••••"
+                            />
+                        </div>
+
+                        <button 
+                            className={cs.passBtn}
+                            onClick={handleChangePassword}
+                            disabled={passSaving}
+                        >
+                            {passSaving ? 'Updating...' : 'Change Password'}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

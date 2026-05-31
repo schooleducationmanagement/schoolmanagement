@@ -26,12 +26,12 @@ export default function TeacherAssignments() {
                 .select(`
           id,
           teachers ( id, name ),
-          subjects ( id, name, icon, class_id, classes ( name ) )
+          subjects ( id, name, class_id, classes ( name ) )
         `)
                 .order('created_at'),
             supabase.from('teachers').select('id, name').order('name'),
             supabase.from('classes').select('id, name').order('grade').order('section'),
-            supabase.from('subjects').select('id, name, icon, class_id').order('name'),
+            supabase.from('subjects').select('id, name, class_id').order('name'),
         ])
         if (a.error) setError(a.error.message)
         else setAssignments(a.data ?? [])
@@ -149,7 +149,6 @@ export default function TeacherAssignments() {
                                     <tr key={a.id}>
                                         <td><strong>{a.teachers?.name}</strong></td>
                                         <td>
-                                            <span style={{ marginRight: 6 }}>{a.subjects?.icon}</span>
                                             {a.subjects?.name}
                                         </td>
                                         <td>
@@ -232,7 +231,7 @@ export default function TeacherAssignments() {
                                 </option>
                                 {filteredSubs.map(sub => (
                                     <option key={sub.id} value={sub.id}>
-                                        {sub.icon} {sub.name}
+                                        {sub.name}
                                     </option>
                                 ))}
                             </select>

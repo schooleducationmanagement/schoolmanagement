@@ -6,6 +6,10 @@ import TeacherHome from '../pages/teacher/Home'
 import Attendance from '../pages/teacher/Attendance'
 import ClassroomLog from '../pages/teacher/ClassroomLog'
 import Profile from '../pages/teacher/Profile'
+import Announcements from '../pages/teacher/Announcements'
+import Students from '../pages/teacher/Students'
+import Timetable from '../pages/teacher/Timetable'
+import ExamMarks from '../pages/teacher/ExamMarks'
 
 export default function TeacherRoutes() {
     const [teacher, setTeacher] = useState(null)
@@ -32,6 +36,10 @@ export default function TeacherRoutes() {
                 <Route path="attendance" element={<Attendance />} />
                 <Route path="log" element={<ClassroomLog />} />
                 <Route path="profile" element={<Profile />} />
+                <Route path="announcements" element={<Announcements />} />
+                <Route path="students" element={<Students />} />
+                <Route path="timetable" element={<Timetable />} />
+                <Route path="marks" element={<ExamMarks />} />
             </Route>
         </Routes>
     )

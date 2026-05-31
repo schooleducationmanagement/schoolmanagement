@@ -21,14 +21,46 @@ const EMPTY_FORM = {
     parent_email: '',
     address: '',
     fee_category: 'General',
-    // fee fields
     total_amount: '',
     payment_plan: 'Annual',
 }
 
+/* ── tiny icon components (inline svg, no external dep) ── */
+function Icon({ d, size = 16 }) {
+    return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"
+            strokeLinejoin="round" style={{ flexShrink: 0 }}>
+            <path d={d} />
+        </svg>
+    )
+}
+
+const ICONS = {
+    user: 'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',
+    book: 'M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z',
+    users: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',
+    rupee: 'M18 7H9.5a4.5 4.5 0 0 0 0 9H12M6 7h12M6 11h12M12 16l4 5',
+    alert: 'M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01',
+}
+
+/* ── field wrapper ── */
+function Field({ label, required, children, span }) {
+    const style = span ? { gridColumn: span } : undefined
+    return (
+        <div className={s.field} style={style}>
+            <label className={s.label}>
+                {label}
+                {required && <span style={{ color: '#ef4444', marginLeft: 2 }}>*</span>}
+            </label>
+            {children}
+        </div>
+    )
+}
+
 export default function StudentForm() {
     const navigate = useNavigate()
-    const { id } = useParams()       // present when editing
+    const { id } = useParams()
     const isEdit = Boolean(id)
 
     const [form, setForm] = useState(EMPTY_FORM)
@@ -42,7 +74,6 @@ export default function StudentForm() {
         if (isEdit) loadStudent()
     }, [])
 
-    // auto-suggest roll number when class changes
     useEffect(() => {
         if (form.class_id && !isEdit) suggestRollNumber(form.class_id)
     }, [form.class_id])
@@ -59,26 +90,16 @@ export default function StudentForm() {
     async function suggestRollNumber(classId) {
         const { data } = await supabase
             .rpc('next_roll_number', { p_class_id: classId })
-        if (data != null) {
-            setForm(f => ({ ...f, roll_number: data }))
-        }
+        if (data != null) setForm(f => ({ ...f, roll_number: data }))
     }
 
     async function loadStudent() {
         setLoading(true)
         const { data: st } = await supabase
-            .from('students_full')
-            .select('*')
-            .eq('id', id)
-            .single()
-
+            .from('students_full').select('*').eq('id', id).single()
         const { data: fee } = await supabase
-            .from('fees')
-            .select('*')
-            .eq('student_id', id)
-            .eq('academic_year', CURRENT_YEAR)
-            .single()
-
+            .from('fees').select('*')
+            .eq('student_id', id).eq('academic_year', CURRENT_YEAR).single()
         if (st) {
             setForm({
                 full_name: st.full_name,
@@ -108,7 +129,6 @@ export default function StudentForm() {
     }
 
     async function handleSubmit() {
-        // validate required fields
         const required = ['full_name', 'dob', 'class_id', 'roll_number',
             'admission_date', 'academic_year', 'parent_name', 'parent_phone']
         const missing = required.filter(k => !form[k])
@@ -116,7 +136,6 @@ export default function StudentForm() {
             setError('Please fill in all required fields: ' + missing.join(', '))
             return
         }
-
         setSaving(true)
         setError(null)
 
@@ -138,56 +157,84 @@ export default function StudentForm() {
         }
 
         let studentId = id
-
         if (isEdit) {
-            const { error } = await supabase
-                .from('students')
-                .update(studentPayload)
-                .eq('id', id)
+            const { error } = await supabase.from('students').update(studentPayload).eq('id', id)
             if (error) { setError(error.message); setSaving(false); return }
         } else {
-            // insert with empty student_id — trigger will generate it
             const { data, error } = await supabase
                 .from('students')
                 .insert({ ...studentPayload, student_id: '' })
-                .select()
-                .single()
+                .select().single()
             if (error) { setError(error.message); setSaving(false); return }
             studentId = data.id
         }
 
-        // save fee record if amount provided
         if (form.total_amount) {
-            const feePayload = {
+            await supabase.from('fees').upsert({
                 student_id: studentId,
                 academic_year: form.academic_year,
                 total_amount: parseFloat(form.total_amount),
                 payment_plan: form.payment_plan,
-            }
-            // upsert fee record
-            await supabase
-                .from('fees')
-                .upsert(feePayload, { onConflict: 'student_id,academic_year' })
+            }, { onConflict: 'student_id,academic_year' })
         }
 
         setSaving(false)
         navigate(`/admin/students/${studentId}`)
     }
 
-    if (loading) return <div className={s.loading}>Loading student data...</div>
+    if (loading) return (
+        <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            minHeight: 320, color: '#64748b', gap: 10, fontSize: '0.9rem'
+        }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+                style={{ animation: 'spin 1s linear infinite' }}>
+                <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+            </svg>
+            <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
+            Loading student data…
+        </div>
+    )
 
     return (
         <div className={cs.page}>
+
+            {/* ── Page header ── */}
+            <div className={cs.pageHeader}>
+                <h1 className={cs.pageTitle}>
+                    {isEdit ? 'Edit Student' : 'Register New Student'}
+                </h1>
+                <p className={cs.pageSubtitle}>
+                    {isEdit
+                        ? 'Update student information and fee details'
+                        : 'Fill in the details below to add a new student'}
+                </p>
+            </div>
+
             <div className={cs.formCard}>
 
-                {error && <div className={s.error}>{error}</div>}
+                {/* ── Error banner ── */}
+                {error && (
+                    <div style={{
+                        display: 'flex', alignItems: 'flex-start', gap: 10,
+                        margin: '0', padding: '14px 32px',
+                        background: '#fef2f2', borderBottom: '1px solid #fecaca',
+                        color: '#b91c1c', fontSize: '0.85rem', fontWeight: 500,
+                    }}>
+                        <Icon d={ICONS.alert} size={16} />
+                        <span>{error}</span>
+                    </div>
+                )}
 
-                {/* Personal Details */}
+                {/* ══ Personal Details ══ */}
                 <div className={cs.section}>
-                    <div className={cs.sectionTitle}>Personal Details</div>
+                    <div className={cs.sectionTitle}>
+                        <Icon d={ICONS.user} size={13} />
+                        Personal Details
+                    </div>
                     <div className={cs.grid3}>
-                        <div className={s.field} style={{ gridColumn: '1 / -1' }}>
-                            <label className={s.label}>Full Name *</label>
+                        <Field label="Full Name" required span="1 / -1">
                             <input
                                 className={s.input}
                                 name="full_name"
@@ -195,9 +242,8 @@ export default function StudentForm() {
                                 onChange={handleChange}
                                 placeholder="e.g. Aarav Sharma"
                             />
-                        </div>
-                        <div className={s.field}>
-                            <label className={s.label}>Date of Birth *</label>
+                        </Field>
+                        <Field label="Date of Birth" required>
                             <input
                                 className={s.input}
                                 name="dob"
@@ -205,34 +251,34 @@ export default function StudentForm() {
                                 value={form.dob}
                                 onChange={handleChange}
                             />
-                        </div>
-                        <div className={s.field}>
-                            <label className={s.label}>Gender</label>
+                        </Field>
+                        <Field label="Gender">
                             <select className={s.select} name="gender" value={form.gender} onChange={handleChange}>
                                 <option value="">-- Select --</option>
                                 <option>Male</option>
                                 <option>Female</option>
                                 <option>Other</option>
                             </select>
-                        </div>
-                        <div className={s.field}>
-                            <label className={s.label}>Blood Group</label>
+                        </Field>
+                        <Field label="Blood Group">
                             <select className={s.select} name="blood_group" value={form.blood_group} onChange={handleChange}>
                                 <option value="">-- Select --</option>
                                 {['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'].map(bg => (
                                     <option key={bg}>{bg}</option>
                                 ))}
                             </select>
-                        </div>
+                        </Field>
                     </div>
                 </div>
 
-                {/* Academic Details */}
+                {/* ══ Academic Details ══ */}
                 <div className={cs.section}>
-                    <div className={cs.sectionTitle}>Academic Details</div>
+                    <div className={cs.sectionTitle}>
+                        <Icon d={ICONS.book} size={13} />
+                        Academic Details
+                    </div>
                     <div className={cs.grid3}>
-                        <div className={s.field}>
-                            <label className={s.label}>Class *</label>
+                        <Field label="Class" required>
                             <select
                                 className={s.select}
                                 name="class_id"
@@ -244,9 +290,8 @@ export default function StudentForm() {
                                     <option key={c.id} value={c.id}>{c.name}</option>
                                 ))}
                             </select>
-                        </div>
-                        <div className={s.field}>
-                            <label className={s.label}>Roll Number *</label>
+                        </Field>
+                        <Field label="Roll Number" required>
                             <input
                                 className={s.input}
                                 name="roll_number"
@@ -256,9 +301,8 @@ export default function StudentForm() {
                                 onChange={handleChange}
                                 placeholder="Auto-suggested"
                             />
-                        </div>
-                        <div className={s.field}>
-                            <label className={s.label}>Academic Year *</label>
+                        </Field>
+                        <Field label="Academic Year" required>
                             <input
                                 className={s.input}
                                 name="academic_year"
@@ -266,9 +310,8 @@ export default function StudentForm() {
                                 onChange={handleChange}
                                 placeholder="e.g. 2025-26"
                             />
-                        </div>
-                        <div className={s.field}>
-                            <label className={s.label}>Admission Date *</label>
+                        </Field>
+                        <Field label="Admission Date" required>
                             <input
                                 className={s.input}
                                 name="admission_date"
@@ -276,16 +319,18 @@ export default function StudentForm() {
                                 value={form.admission_date}
                                 onChange={handleChange}
                             />
-                        </div>
+                        </Field>
                     </div>
                 </div>
 
-                {/* Parent Details */}
+                {/* ══ Parent / Guardian Details ══ */}
                 <div className={cs.section}>
-                    <div className={cs.sectionTitle}>Parent / Guardian Details</div>
+                    <div className={cs.sectionTitle}>
+                        <Icon d={ICONS.users} size={13} />
+                        Parent / Guardian Details
+                    </div>
                     <div className={cs.grid3}>
-                        <div className={s.field}>
-                            <label className={s.label}>Parent Name *</label>
+                        <Field label="Parent Name" required>
                             <input
                                 className={s.input}
                                 name="parent_name"
@@ -293,18 +338,16 @@ export default function StudentForm() {
                                 onChange={handleChange}
                                 placeholder="e.g. Ramesh Sharma"
                             />
-                        </div>
-                        <div className={s.field}>
-                            <label className={s.label}>Relation</label>
+                        </Field>
+                        <Field label="Relation">
                             <select className={s.select} name="parent_relation" value={form.parent_relation} onChange={handleChange}>
                                 <option>Parent</option>
                                 <option>Father</option>
                                 <option>Mother</option>
                                 <option>Guardian</option>
                             </select>
-                        </div>
-                        <div className={s.field}>
-                            <label className={s.label}>Phone *</label>
+                        </Field>
+                        <Field label="Phone" required>
                             <input
                                 className={s.input}
                                 name="parent_phone"
@@ -312,9 +355,8 @@ export default function StudentForm() {
                                 onChange={handleChange}
                                 placeholder="e.g. 9876543210"
                             />
-                        </div>
-                        <div className={s.field}>
-                            <label className={s.label}>Email</label>
+                        </Field>
+                        <Field label="Email">
                             <input
                                 className={s.input}
                                 name="parent_email"
@@ -323,9 +365,8 @@ export default function StudentForm() {
                                 onChange={handleChange}
                                 placeholder="parent@email.com"
                             />
-                        </div>
-                        <div className={s.field} style={{ gridColumn: 'span 2' }}>
-                            <label className={s.label}>Address</label>
+                        </Field>
+                        <Field label="Address" span="span 2">
                             <input
                                 className={s.input}
                                 name="address"
@@ -333,24 +374,25 @@ export default function StudentForm() {
                                 onChange={handleChange}
                                 placeholder="Full address"
                             />
-                        </div>
+                        </Field>
                     </div>
                 </div>
 
-                {/* Fee Details */}
+                {/* ══ Fee Details ══ */}
                 <div className={cs.section}>
-                    <div className={cs.sectionTitle}>Fee Details</div>
+                    <div className={cs.sectionTitle}>
+                        <Icon d={ICONS.rupee} size={13} />
+                        Fee Details
+                    </div>
                     <div className={cs.grid3}>
-                        <div className={s.field}>
-                            <label className={s.label}>Fee Category</label>
+                        <Field label="Fee Category">
                             <select className={s.select} name="fee_category" value={form.fee_category} onChange={handleChange}>
                                 <option>General</option>
                                 <option>Scholarship</option>
                                 <option>Staff Ward</option>
                             </select>
-                        </div>
-                        <div className={s.field}>
-                            <label className={s.label}>Total Fee Amount (Rs)</label>
+                        </Field>
+                        <Field label="Total Fee Amount (₹)">
                             <input
                                 className={s.input}
                                 name="total_amount"
@@ -360,23 +402,23 @@ export default function StudentForm() {
                                 onChange={handleChange}
                                 placeholder="e.g. 45000"
                             />
-                        </div>
-                        <div className={s.field}>
-                            <label className={s.label}>Payment Plan</label>
+                        </Field>
+                        <Field label="Payment Plan">
                             <select className={s.select} name="payment_plan" value={form.payment_plan} onChange={handleChange}>
                                 <option>Annual</option>
                                 <option>Quarterly</option>
                                 <option>Monthly</option>
                             </select>
-                        </div>
+                        </Field>
                     </div>
                 </div>
 
-                {/* Actions */}
+                {/* ══ Actions ══ */}
                 <div className={cs.actions}>
                     <button
                         className={s.btnGhost}
                         onClick={() => navigate(-1)}
+                        style={{ minWidth: 96 }}
                     >
                         Cancel
                     </button>
@@ -384,12 +426,23 @@ export default function StudentForm() {
                         className={s.btnPrimary}
                         onClick={handleSubmit}
                         disabled={saving}
+                        style={{ minWidth: 160, display: 'flex', alignItems: 'center', gap: 7, justifyContent: 'center' }}
                     >
-                        {saving
-                            ? 'Saving...'
-                            : isEdit ? 'Update Student' : 'Register Student'}
+                        {saving ? (
+                            <>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+                                    style={{ animation: 'spin 1s linear infinite' }}>
+                                    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                                </svg>
+                                Saving…
+                            </>
+                        ) : (
+                            isEdit ? 'Update Student' : 'Register Student'
+                        )}
                     </button>
                 </div>
+
             </div>
         </div>
     )

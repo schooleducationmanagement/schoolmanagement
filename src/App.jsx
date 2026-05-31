@@ -1,6 +1,8 @@
 import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom'
 import AdminRoutes from './routes/AdminRoutes'
 import TeacherRoutes from './routes/TeacherRoutes'
+import StudentRoutes from './routes/StudentRoutes'
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -8,12 +10,10 @@ export default function App() {
         {/* Default → admin for now */}
         <Route path="/" element={<Navigate to="/admin" replace />} />
 
-        {/* Admin portal */}
+        {/* Portals */}
         <Route path="/admin/*" element={<AdminRoutes />} />
         <Route path="/teacher/*" element={<TeacherRoutes />} />
-        {/* Teacher + Parent — added later */}
-        {/* <Route path="/teacher/*" element={<TeacherRoutes />} /> */}
-        {/* <Route path="/parent/*"  element={<ParentRoutes />}  /> */}
+        <Route path="/student/*" element={<StudentRoutes />} />
       </Routes>
     </BrowserRouter>
   )

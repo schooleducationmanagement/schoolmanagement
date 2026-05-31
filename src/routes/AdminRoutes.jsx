@@ -10,7 +10,8 @@ import Students from '../pages/admin/Students'
 import StudentForm from '../pages/admin/Studentform'
 import StudentProfile from '../pages/admin/Studentprofile'
 import Announcements from '../pages/admin/Announcements'
-
+import Examinations from '../pages/admin/Examinations'
+import ExamDetail from '../pages/admin/ExamDetail'
 
 export default function AdminRoutes() {
     return (
@@ -27,6 +28,8 @@ export default function AdminRoutes() {
                 <Route path="students/:id" element={<StudentProfile />} />
                 <Route path="students/:id/edit" element={<StudentForm />} />
                 <Route path="announcements" element={<Announcements />} />
+                <Route path="examinations" element={<Examinations />} />
+                <Route path="examinations/:id" element={<ExamDetail />} />
             </Route>
         </Routes>
     )

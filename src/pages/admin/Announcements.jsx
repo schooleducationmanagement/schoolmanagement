@@ -3,7 +3,15 @@ import { supabase } from '../../lib/supabase'
 import s from './Announcements.module.css'
 import ps from '../../components/admin/PageShell.module.css'
 
-const EMPTY_FORM = { title: '', description: '', startDate: '', endDate: '' }
+const EMPTY_FORM = {
+    title: '',
+    description: '',
+    startDate: '',
+    endDate: '',
+    audienceType: 'all',
+    audienceScope: 'everyone',
+    targetIds: []
+}
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 
@@ -39,12 +47,30 @@ export default function Announcements() {
     // Hero state: which announcement is shown (null = latest)
     const [selectedAnnIdx, setSelectedAnnIdx] = useState(0)
 
-    // Calendar navigation
     const today = new Date()
     const [calYear, setCalYear] = useState(today.getFullYear())
     const [calMonth, setCalMonth] = useState(today.getMonth()) // 0-indexed
 
-    useEffect(() => { fetchAnnouncements() }, [])
+    // Lists for selectors
+    const [teachers, setTeachers] = useState([])
+    const [classes, setClasses] = useState([])
+    const [students, setStudents] = useState([])
+
+    useEffect(() => {
+        fetchAnnouncements()
+        fetchTargetOptions()
+    }, [])
+
+    async function fetchTargetOptions() {
+        const [tRes, cRes, sRes] = await Promise.all([
+            supabase.from('teachers').select('id, name').order('name'),
+            supabase.from('classes').select('id, name, grade, section').order('grade').order('section'),
+            supabase.from('students').select('id, full_name, class_id').order('full_name')
+        ])
+        setTeachers(tRes.data ?? [])
+        setClasses(cRes.data ?? [])
+        setStudents(sRes.data ?? [])
+    }
 
     // Reset hero to latest whenever announcements reload
     useEffect(() => { setSelectedAnnIdx(0) }, [announcements])
@@ -76,6 +102,9 @@ export default function Announcements() {
             description: ann.description,
             startDate: ann.start_date,
             endDate: ann.end_date,
+            audienceType: ann.audience_type || 'all',
+            audienceScope: ann.audience_scope || 'everyone',
+            targetIds: ann.target_ids || []
         })
         setEditId(ann.id)
         setModal(true)
@@ -93,6 +122,9 @@ export default function Announcements() {
             description: form.description.trim(),
             start_date: form.startDate,
             end_date: form.endDate,
+            audience_type: form.audienceType,
+            audience_scope: form.audienceScope,
+            target_ids: form.targetIds.length > 0 ? form.targetIds : null
         }
         const { error: saveError } = editId
             ? await supabase.from('announcements').update(payload).eq('id', editId)
@@ -300,6 +332,7 @@ export default function Announcements() {
                             <thead>
                                 <tr>
                                     <th>Announcement Title</th>
+                                    <th>Audience</th>
                                     <th>Description</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
@@ -314,6 +347,13 @@ export default function Announcements() {
                                 ) : announcements.map(ann => (
                                     <tr key={ann.id}>
                                         <td><strong>{ann.title}</strong></td>
+                                        <td>
+                                            <div className={s.audienceBadge}>
+                                                {ann.audience_type === 'all' ? 'Everyone' : 
+                                                 ann.audience_type === 'teachers' ? (ann.audience_scope === 'everyone' ? 'All Teachers' : 'Specific Teachers') :
+                                                 (ann.audience_scope === 'everyone' ? 'All Students' : 'Targeted Students')}
+                                            </div>
+                                        </td>
                                         <td className={s.descCell}>{ann.description}</td>
                                         <td>{formatDate(ann.start_date)}</td>
                                         <td>{formatDate(ann.end_date)}</td>
@@ -392,6 +432,104 @@ export default function Announcements() {
                                 />
                             </div>
                         </div>
+
+                        <hr className={s.hr} />
+
+                        <div className={ps.field}>
+                            <label className={ps.label}>Target Audience</label>
+                            <select
+                                className={ps.input}
+                                value={form.audienceType}
+                                onChange={e => setForm({ ...form, audienceType: e.target.value, audienceScope: 'everyone', targetIds: [] })}
+                            >
+                                <option value="all">Everyone (Teachers + Students)</option>
+                                <option value="teachers">Teachers Only</option>
+                                <option value="students">Students Only</option>
+                            </select>
+                        </div>
+
+                        {form.audienceType !== 'all' && (
+                            <div className={ps.field}>
+                                <label className={ps.label}>Audience Scope</label>
+                                <select
+                                    className={ps.input}
+                                    value={form.audienceScope}
+                                    onChange={e => setForm({ ...form, audienceScope: e.target.value, targetIds: [] })}
+                                >
+                                    <option value="everyone">
+                                        {form.audienceType === 'teachers' ? 'All Teachers' : 'All Students'}
+                                    </option>
+                                    <option value="specific">
+                                        {form.audienceType === 'teachers' ? 'Specific Teachers' : 'Specific Classes / Students'}
+                                    </option>
+                                </select>
+                            </div>
+                        )}
+
+                        {form.audienceScope === 'specific' && (
+                            <div className={ps.field}>
+                                <label className={ps.label}>Select Recipients</label>
+                                <div className={s.targetList}>
+                                    {form.audienceType === 'teachers' && teachers.map(t => (
+                                        <label key={t.id} className={s.targetItem}>
+                                            <input
+                                                type="checkbox"
+                                                checked={form.targetIds.includes(t.id)}
+                                                onChange={e => {
+                                                    const newIds = e.target.checked
+                                                        ? [...form.targetIds, t.id]
+                                                        : form.targetIds.filter(id => id !== t.id)
+                                                    setForm({ ...form, targetIds: newIds })
+                                                }}
+                                            />
+                                            {t.name}
+                                        </label>
+                                    ))}
+
+                                    {form.audienceType === 'students' && (
+                                        <>
+                                            <div className={s.targetGroupLabel}>Classes</div>
+                                            <div className={s.targetGrid}>
+                                                {classes.map(c => (
+                                                    <label key={c.id} className={s.targetItem}>
+                                                        <input
+                                                            type="checkbox"
+                                                            checked={form.targetIds.includes(c.id)}
+                                                            onChange={e => {
+                                                                const newIds = e.target.checked
+                                                                    ? [...form.targetIds, c.id]
+                                                                    : form.targetIds.filter(id => id !== c.id)
+                                                                setForm({ ...form, targetIds: newIds })
+                                                            }}
+                                                        />
+                                                        {c.grade}{c.section} - {c.name}
+                                                    </label>
+                                                ))}
+                                            </div>
+
+                                            <div className={s.targetGroupLabel}>Individual Students</div>
+                                            <div className={s.targetGrid}>
+                                                {students.map(st => (
+                                                    <label key={st.id} className={s.targetItem}>
+                                                        <input
+                                                            type="checkbox"
+                                                            checked={form.targetIds.includes(st.id)}
+                                                            onChange={e => {
+                                                                const newIds = e.target.checked
+                                                                    ? [...form.targetIds, st.id]
+                                                                    : form.targetIds.filter(id => id !== st.id)
+                                                                setForm({ ...form, targetIds: newIds })
+                                                            }}
+                                                        />
+                                                        {st.full_name}
+                                                    </label>
+                                                ))}
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+                        )}
 
                         <div className={ps.modalFooter}>
                             <button className={ps.btnGhost} onClick={toggleModal} disabled={saving}>Cancel</button>

@@ -9,7 +9,10 @@ const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Frid
 
 // Format a Date object → "YYYY-MM-DD"
 function toDateStr(d) {
-    return d.toISOString().slice(0, 10)
+    const y = d.getFullYear()
+    const m = String(d.getMonth() + 1).padStart(2, '0')
+    const r = String(d.getDate()).padStart(2, '0')
+    return `${y}-${m}-${r}`
 }
 
 // Parse "YYYY-MM-DD" → Date object (local, no timezone shift)
@@ -43,16 +46,20 @@ export default function TeacherHome() {
         const dayName = DAYS[dateObj.getDay()]   // e.g. "Mon"
 
         // 1. Timetable slots for this teacher on this day-of-week
-        const { data: slotData } = await supabase
+        const { data: slotData, error: slotError } = await supabase
             .from('timetable_slots')
             .select(`
         id, day, period, start_time, end_time, class_id,
-        subjects ( id, name, short ),
+        subjects ( id, name ),
         classes  ( id, name, grade, section, config_id )
       `)
             .eq('teacher_id', teacher.id)
             .eq('day', dayName)
             .order('period')
+
+        if (slotError) {
+            console.error('Error fetching slots:', slotError)
+        }
 
         const daySlots = slotData ?? []
         setSlots(daySlots)

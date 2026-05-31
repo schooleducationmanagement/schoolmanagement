@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../../lib/supabase'
 import s from '../../components/admin/PageShell.module.css'
 
-const EMPTY_FORM = { name: '', email: '', phone: '', class_teacher_of: '' }
+const EMPTY_FORM = { name: '', email: '', phone: '', class_teacher_of: '', password: '' }
 
 export default function Teachers() {
     const [teachers, setTeachers] = useState([])
@@ -66,8 +66,8 @@ export default function Teachers() {
     }
 
     async function handleSave() {
-        if (!form.name.trim() || !form.email.trim()) {
-            setError('Name and email are required')
+        if (!form.name.trim() || !form.email.trim() || (!editId && !form.password)) {
+            setError(editId ? 'Name and email are required' : 'Name, email and password are required')
             return
         }
         setSaving(true)
@@ -79,6 +79,7 @@ export default function Teachers() {
             phone: form.phone.trim() || null,
             class_teacher_of: form.class_teacher_of || null,
         }
+        if (!editId) payload.password = form.password
 
         const { error } = editId
             ? await supabase.from('teachers').update(payload).eq('id', editId)
@@ -189,6 +190,20 @@ export default function Teachers() {
                                 placeholder="e.g. ravi@school.in"
                             />
                         </div>
+
+                        {!editId && (
+                            <div className={s.field}>
+                                <label className={s.label}>Password</label>
+                                <input
+                                    className={s.input}
+                                    name="password"
+                                    type="password"
+                                    value={form.password}
+                                    onChange={handleChange}
+                                    placeholder="Enter initial password"
+                                />
+                            </div>
+                        )}
 
                         <div className={s.grid2}>
                             <div className={s.field}>

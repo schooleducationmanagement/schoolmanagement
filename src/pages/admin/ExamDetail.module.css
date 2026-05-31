@@ -1,0 +1,911 @@
+.page {
+    padding: 28px 32px;
+    max-width: 1140px;
+}
+
+.centerMsg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    color: #aaa;
+    font-size: 14px;
+}
+
+/* ── Top bar ── */
+.topBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.backBtn {
+    background: none;
+    border: none;
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0;
+}
+
+.backBtn:hover {
+    text-decoration: underline;
+}
+
+.topRight {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btnSchedule {
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    background: #16a34a;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btnSchedule:hover {
+    background: #15803d;
+}
+
+.btnLockAll {
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    background: #dc2626;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btnLockAll:hover {
+    background: #b91c1c;
+}
+
+.btnUnlockAll {
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #555;
+    background: #f3f4f6;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btnUnlockAll:hover {
+    background: #e5e7eb;
+}
+
+.btnPublish {
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    background: #7c3aed;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btnPublish:hover {
+    background: #6d28d9;
+}
+
+.publishedTag {
+    font-size: 13px;
+    color: #16a34a;
+    font-weight: 500;
+}
+
+/* ── Exam meta ── */
+.examMeta {
+    margin-bottom: 22px;
+}
+
+.examTitle {
+    font-size: 23px;
+    font-weight: 700;
+    color: #111;
+    margin: 0 0 4px;
+}
+
+.examSub {
+    font-size: 14px;
+    color: #888;
+}
+
+/* ── Status badges ── */
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.statusDraft {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+.statusScheduled {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.statusLocked {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+/* ── Tabs ── */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 24px;
+    gap: 2px;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #777;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    margin-bottom: -1px;
+    transition: color 0.15s;
+}
+
+.tab:hover {
+    color: #333;
+}
+
+.tabActive {
+    color: #2563eb;
+    border-bottom-color: #2563eb;
+}
+
+.tabPill {
+    background: #f0f0f0;
+    color: #666;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 10px;
+}
+
+.tabActive .tabPill {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+/* ── Tab content ── */
+.tabContent {}
+
+/* ── Stat cards ── */
+.statCards {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.statCard {
+    flex: 1;
+    min-width: 140px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 18px 20px;
+}
+
+.statNum {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 4px;
+}
+
+.statLabel {
+    font-size: 13px;
+    color: #999;
+}
+
+/* ── Card & form ── */
+.card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 24px;
+}
+
+.sectionTitle {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111;
+    margin: 0 0 16px;
+}
+
+.fieldRow {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 160px;
+}
+
+.field label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #444;
+}
+
+.field input,
+.field select {
+    padding: 9px 12px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    color: #111;
+    background: #fff;
+    transition: border-color 0.15s;
+}
+
+.field input:focus,
+.field select:focus {
+    border-color: #2563eb;
+}
+
+/* ── Buttons ── */
+.btnPrimary {
+    padding: 9px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: #2563eb;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.btnPrimary:hover {
+    background: #1d4ed8;
+}
+
+.btnPrimary:disabled {
+    background: #93c5fd;
+    cursor: not-allowed;
+}
+
+/* ── Bulk fill bar ── */
+.bulkBar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.classSelectorBar {
+    margin-bottom: 20px;
+}
+
+.classSelectorLabel {
+    font-size: 13px;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.classPickerActions {
+    margin-bottom: 8px;
+}
+
+.btnSelectAll {
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #2563eb;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.btnSelectAll:hover {
+    background: #dbeafe;
+}
+
+.classPickerGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.classPickerItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    color: #555;
+    transition: all 0.15s;
+    user-select: none;
+}
+
+.classPickerItem:hover {
+    border-color: #93c5fd;
+    background: #f0f7ff;
+}
+
+.classPickerItemActive {
+    border-color: #2563eb;
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-weight: 500;
+}
+
+.classPickerCheck {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    accent-color: #2563eb;
+}
+
+.classPickerName {
+    white-space: nowrap;
+}
+
+.classPickerBadge {
+    background: #dbeafe;
+    color: #2563eb;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 10px;
+    margin-left: 2px;
+}
+
+.bulkLabel {
+    font-size: 13px;
+    font-weight: 500;
+    color: #555;
+    white-space: nowrap;
+}
+
+.bulkInput {
+    padding: 7px 10px;
+    font-size: 13px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    outline: none;
+    color: #111;
+    background: #fff;
+}
+
+.bulkInput:focus {
+    border-color: #2563eb;
+}
+
+.bulkSep {
+    font-size: 13px;
+    color: #aaa;
+}
+
+.btnApply {
+    padding: 7px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #2563eb;
+    background: #eff6ff;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btnApply:hover {
+    background: #dbeafe;
+}
+
+/* ── Class block ── */
+.classBlock {
+    margin-bottom: 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.classHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.classCheckLabel {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.classCheckLabel input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    accent-color: #2563eb;
+}
+
+.classTitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111;
+}
+
+.classCount {
+    font-size: 12px;
+    color: #888;
+    font-weight: 500;
+}
+
+/* ── Matrix table ── */
+.matrixWrap {
+    overflow-x: auto;
+}
+
+.matrixTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.matrixTable thead th {
+    padding: 9px 12px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: #fafafa;
+    border-bottom: 1px solid #eee;
+    white-space: nowrap;
+}
+
+.matrixTable tbody td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #f5f5f5;
+    vertical-align: middle;
+}
+
+.matrixRow:last-child td {
+    border-bottom: none;
+}
+
+.rowActive {
+    background: #fff;
+}
+
+.rowDim {
+    background: #fafafa;
+}
+
+.rowDim .subjectCell {
+    color: #bbb !important;
+}
+
+.rowCheck {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    accent-color: #2563eb;
+}
+
+.subjectCell {
+    font-weight: 500;
+    color: #222;
+}
+
+.cellInput {
+    padding: 6px 8px;
+    font-size: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+    width: 100%;
+    color: #111;
+    background: #fff;
+}
+
+.cellInput:focus {
+    border-color: #2563eb;
+}
+
+.cellInput:disabled {
+    background: #f9f9f9;
+    color: #ccc;
+    border-color: #eee;
+}
+
+.cellInputSm {
+    padding: 6px 8px;
+    font-size: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+    width: 68px;
+    color: #111;
+    background: #fff;
+    text-align: center;
+}
+
+.cellInputSm:focus {
+    border-color: #2563eb;
+}
+
+.cellInputSm:disabled {
+    background: #f9f9f9;
+    color: #ccc;
+    border-color: #eee;
+}
+
+.cellSelect {
+    padding: 6px 8px;
+    font-size: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+    color: #111;
+    background: #fff;
+    min-width: 160px;
+    max-width: 220px;
+}
+
+.cellSelect:focus {
+    border-color: #2563eb;
+}
+
+.cellSelect:disabled {
+    background: #f9f9f9;
+    color: #ccc;
+    border-color: #eee;
+}
+
+/* ── Save bar ── */
+.saveBar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 14px;
+    margin-top: 16px;
+    padding: 14px 0 4px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.saveHint {
+    font-size: 13px;
+    color: #888;
+}
+
+/* ── Empty state ── */
+.emptyState {
+    padding: 48px;
+    text-align: center;
+    color: #aaa;
+    font-size: 14px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+}
+
+/* ── Draft notice ── */
+.draftNotice {
+    padding: 20px 24px;
+    background: #fefce8;
+    border: 1px solid #fde68a;
+    border-radius: 10px;
+    color: #92400e;
+    font-size: 14px;
+}
+
+/* ── Marks top bar ── */
+.marksTopBar {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.marksActions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding-bottom: 2px;
+}
+
+.btnSave {
+    padding: 9px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    background: #2563eb;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btnSave:hover:not(:disabled) {
+    background: #1d4ed8;
+}
+
+.btnSave:disabled {
+    background: #93c5fd;
+    cursor: not-allowed;
+}
+
+.btnLockSub {
+    padding: 9px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #b91c1c;
+    background: #fee2e2;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btnLockSub:hover {
+    background: #fecaca;
+}
+
+.btnUnlock {
+    padding: 9px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #065f46;
+    background: #d1fae5;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btnUnlock:hover {
+    background: #a7f3d0;
+}
+
+/* ── Subject info strip ── */
+.subjectInfoStrip {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 10px 16px;
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #0369a1;
+    margin-bottom: 14px;
+}
+
+.dot {
+    color: #bbb;
+}
+
+.lockedChip {
+    background: #fee2e2;
+    color: #b91c1c;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 4px;
+}
+
+/* ── Stats strip ── */
+.statsStrip {
+    display: flex;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    flex-wrap: wrap;
+}
+
+.stripItem {
+    flex: 1;
+    min-width: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 14px 10px;
+    border-right: 1px solid #f0f0f0;
+}
+
+.stripItem:last-child {
+    border-right: none;
+}
+
+.stripNum {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111;
+}
+
+.stripLabel {
+    font-size: 11px;
+    color: #999;
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* ── Marks table ── */
+.marksTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.marksTable thead {
+    background: #fafafa;
+}
+
+.marksTable thead th {
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid #eee;
+}
+
+.marksTable tbody td {
+    padding: 11px 14px;
+    color: #333;
+    border-bottom: 1px solid #f5f5f5;
+    vertical-align: middle;
+}
+
+.marksRow:last-child td {
+    border-bottom: none;
+}
+
+.marksRow:hover td {
+    background: #fafafa;
+}
+
+.absentRow td {
+    background: #fff9f9 !important;
+}
+
+.rollCell {
+    font-weight: 600;
+    color: #555 !important;
+}
+
+.nameCell {
+    font-weight: 500;
+    color: #111 !important;
+}
+
+.totalCell {
+    font-weight: 600;
+    color: #222 !important;
+}
+
+.absentToggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #555;
+    cursor: pointer;
+    user-select: none;
+}
+
+.absentToggle input {
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+    accent-color: #dc2626;
+}
+
+.marksInput {
+    width: 80px;
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+    text-align: center;
+    color: #111;
+    transition: border-color 0.15s;
+}
+
+.marksInput:focus {
+    border-color: #2563eb;
+}
+
+.marksInput:disabled {
+    background: #f9f9f9;
+    color: #ccc;
+    border-color: #eee;
+}
+
+/* ── Result tags ── */
+.tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.tagPass {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.tagFail {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.tagAbsent {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+.tagPending {
+    background: #fef3c7;
+    color: #92400e;
+}

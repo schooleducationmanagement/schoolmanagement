@@ -46,7 +46,7 @@ export default function TeacherAttendance() {
             .from('timetable_slots')
             .select(`
         id, day, period, start_time, end_time,
-        subjects ( name, short ),
+        subjects ( name ),
         classes  ( id, name )
       `)
             .eq('teacher_id', teacher.id)

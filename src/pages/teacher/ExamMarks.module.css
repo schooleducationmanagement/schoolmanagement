@@ -1,0 +1,110 @@
+.selectors {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.mainCard {
+    background: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.cardHeader {
+    padding: 16px 20px;
+    border-bottom: 1px solid #374151;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #111827;
+}
+
+.subTitle {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fef3c7;
+}
+
+.marksInfo {
+    font-size: 0.78rem;
+    color: #6b7280;
+}
+
+.marksInfo strong {
+    color: #f59e0b;
+}
+
+.stName {
+    font-weight: 600;
+    font-size: 0.88rem;
+}
+
+.stId {
+    font-size: 0.72rem;
+    color: #6b7280;
+    margin-top: 1px;
+}
+
+.markInput, .graceInput {
+    width: 100%;
+    background: #111827;
+    border: 1.5px solid #374151;
+    border-radius: 6px;
+    padding: 6px 10px;
+    color: #fef3c7;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.markInput:focus, .graceInput:focus {
+    border-color: #f59e0b;
+}
+
+.markInput:disabled, .graceInput:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #ef4444;
+}
+
+.rowAbsent {
+    background: rgba(239, 68, 68, 0.03);
+}
+
+.rowAbsent td {
+    color: #6b7280;
+}
+
+.footer {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #374151;
+    background: #111827;
+}
+
+.footerInfo {
+    font-size: 0.78rem;
+    color: #4b5563;
+    font-style: italic;
+}
+
+@media (max-width: 640px) {
+    .cardHeader, .footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .selectors {
+        flex-direction: column;
+    }
+}

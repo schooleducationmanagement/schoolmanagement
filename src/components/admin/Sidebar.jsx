@@ -30,6 +30,12 @@ const links = [
             { to: '/admin/timetable', label: 'Assign Timetable', icon: '📅' },
         ],
     },
+    {
+        section: 'Examination',
+        items: [
+            { to: '/admin/examinations', label: 'Create Examination', icon: '📝' },
+        ],
+    },
 ]
 
 export default function Sidebar({ collapsed, onToggle, onNavClick }) {

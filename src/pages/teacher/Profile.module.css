@@ -160,6 +160,86 @@
     margin-top: 1px;
 }
 
+/* Security Form */
+.passForm {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 12px;
+}
+
+.passHint {
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin-bottom: 4px;
+}
+
+.passField {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.passLabel {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #9ca3af;
+}
+
+.passInput {
+    background: #111827;
+    border: 1px solid #374151;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.9rem;
+    color: #fff;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.passInput:focus {
+    border-color: #f59e0b;
+}
+
+.passBtn {
+    margin-top: 10px;
+    background: #f59e0b;
+    color: #000;
+    font-weight: 700;
+    padding: 11px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.passBtn:hover:not(:disabled) {
+    background: #ea580c;
+}
+
+.passBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.passError {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+}
+
+.passSuccess {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+}
+
 /* ══ Responsive ══ */
 @media (max-width: 768px) {
     .headerCard {

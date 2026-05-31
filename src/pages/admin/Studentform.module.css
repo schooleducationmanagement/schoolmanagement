@@ -1,14 +1,118 @@
-/* ── Studentform.module.css – redesigned ── */
+/* ── Studentform.module.css – redesigned (form + profile) ── */
 
-/* Page */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap');
+
+/* ═══════════════════════════════════════════════
+   SHARED
+═══════════════════════════════════════════════ */
+
 .page {
     max-width: 960px;
     margin: 0 auto;
-    padding: 0 0 48px;
-    font-family: 'DM Sans', sans-serif;
+    padding: 32px 20px 64px;
+    font-family: 'Instrument Sans', system-ui, sans-serif;
 }
 
-/* ── Header card ── */
+/* ═══════════════════════════════════════════════
+   FORM PAGE — page header
+═══════════════════════════════════════════════ */
+
+.pageHeader {
+    margin-bottom: 32px;
+}
+
+.pageTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: #0f172a;
+    line-height: 1.2;
+    margin: 0 0 4px;
+}
+
+.pageSubtitle {
+    font-size: 0.82rem;
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════════
+   FORM PAGE — card + sections
+═══════════════════════════════════════════════ */
+
+.formCard {
+    background: #fff;
+    border-radius: 20px;
+    border: 1px solid #e2e8f0;
+    box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.04),
+        0 4px 16px rgba(15, 23, 42, 0.06);
+    overflow: hidden;
+}
+
+.section {
+    padding: 28px 32px;
+    position: relative;
+}
+
+.section+.section {
+    border-top: 1px solid #f1f5f9;
+}
+
+.section::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 20px;
+    bottom: 20px;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: transparent;
+    transition: background 0.2s ease;
+}
+
+.section:focus-within::before {
+    background: #3b82f6;
+}
+
+.sectionTitle {
+    font-size: 0.67rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #94a3b8;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sectionTitle::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #f1f5f9;
+}
+
+.grid3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px 18px;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 20px 32px 28px;
+    border-top: 1px solid #f1f5f9;
+    background: #fafbfc;
+}
+
+/* ═══════════════════════════════════════════════
+   PROFILE PAGE — header card
+═══════════════════════════════════════════════ */
+
 .headerCard {
     display: flex;
     align-items: center;
@@ -16,11 +120,11 @@
     background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #1d4ed8 100%);
     border-radius: 20px;
     padding: 28px 32px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     color: #fff;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 8px 32px rgba(29, 78, 216, 0.25);
+    box-shadow: 0 8px 32px rgba(29, 78, 216, 0.22);
 }
 
 .headerCard::before {
@@ -31,18 +135,17 @@
     pointer-events: none;
 }
 
-/* Avatar */
 .avatar {
     flex-shrink: 0;
-    width: 68px;
-    height: 68px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.15);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.28);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 700;
     letter-spacing: -1px;
     color: #fff;
@@ -55,20 +158,20 @@
 }
 
 .studentName {
-    font-size: 1.5rem;
+    font-size: 1.45rem;
     font-weight: 700;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.4px;
     color: #fff;
     line-height: 1.2;
 }
 
 .studentId {
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.55);
-    margin-top: 2px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 3px;
     margin-bottom: 10px;
-    letter-spacing: 0.8px;
+    letter-spacing: 0.9px;
     text-transform: uppercase;
 }
 
@@ -82,7 +185,10 @@
     flex-shrink: 0;
 }
 
-/* ── Two-column grid ── */
+/* ═══════════════════════════════════════════════
+   PROFILE PAGE — main grid
+═══════════════════════════════════════════════ */
+
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -93,18 +199,21 @@
     grid-column: 1 / -1;
 }
 
-/* ── Card ── */
+/* ═══════════════════════════════════════════════
+   PROFILE PAGE — info cards
+═══════════════════════════════════════════════ */
+
 .card {
     background: #fff;
     border-radius: 16px;
     padding: 22px 24px;
     border: 1px solid #e8edf5;
-    box-shadow: 0 2px 12px rgba(15, 23, 42, 0.05);
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.05), 0 2px 12px rgba(15, 23, 42, 0.04);
     transition: box-shadow 0.2s;
 }
 
 .card:hover {
-    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.09);
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08), 0 4px 20px rgba(15, 23, 42, 0.07);
 }
 
 .cardHeader {
@@ -117,24 +226,27 @@
 }
 
 .cardTitle {
-    font-size: 0.72rem;
+    font-size: 0.67rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.9px;
+    letter-spacing: 1px;
     color: #94a3b8;
     margin-bottom: 16px;
     padding-bottom: 10px;
     border-bottom: 1px solid #f1f5f9;
 }
 
-/* when cardTitle is inside cardHeader, remove bottom margin/border */
+/* when inside cardHeader, strip the bottom styles */
 .cardHeader .cardTitle {
     margin-bottom: 0;
     padding-bottom: 0;
     border-bottom: none;
 }
 
-/* ── Detail list ── */
+/* ═══════════════════════════════════════════════
+   PROFILE PAGE — detail rows
+═══════════════════════════════════════════════ */
+
 .detailList {
     display: flex;
     flex-direction: column;
@@ -164,7 +276,10 @@
     font-size: 0.82rem;
 }
 
-/* ── Attendance ── */
+/* ═══════════════════════════════════════════════
+   PROFILE PAGE — attendance
+═══════════════════════════════════════════════ */
+
 .attPct {
     font-size: 2.6rem;
     font-weight: 800;
@@ -209,7 +324,7 @@
 
 .attStatLabel {
     display: block;
-    font-size: 0.68rem;
+    font-size: 0.67rem;
     color: #94a3b8;
     font-weight: 600;
     text-transform: uppercase;
@@ -217,7 +332,10 @@
     margin-top: 3px;
 }
 
-/* ── Fee card ── */
+/* ═══════════════════════════════════════════════
+   PROFILE PAGE — fee card
+═══════════════════════════════════════════════ */
+
 .feeStats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -233,7 +351,7 @@
 }
 
 .feeStatLabel {
-    font-size: 0.68rem;
+    font-size: 0.67rem;
     color: #94a3b8;
     font-weight: 600;
     text-transform: uppercase;
@@ -263,22 +381,28 @@
     transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ── Payment history ── */
+/* ═══════════════════════════════════════════════
+   PROFILE PAGE — payment history
+═══════════════════════════════════════════════ */
+
 .payHistory {
     border-top: 1px solid #f1f5f9;
     padding-top: 16px;
 }
 
 .payHistoryTitle {
-    font-size: 0.72rem;
+    font-size: 0.67rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.9px;
+    letter-spacing: 1px;
     color: #94a3b8;
     margin-bottom: 10px;
 }
 
-/* ── Pay modal balance ── */
+/* ═══════════════════════════════════════════════
+   PROFILE PAGE — pay modal balance chip
+═══════════════════════════════════════════════ */
+
 .payBalance {
     background: #eff6ff;
     border: 1px solid #bfdbfe;
@@ -289,7 +413,10 @@
     margin-bottom: 16px;
 }
 
-/* ── Empty state ── */
+/* ═══════════════════════════════════════════════
+   SHARED — empty state
+═══════════════════════════════════════════════ */
+
 .noData {
     text-align: center;
     color: #94a3b8;
@@ -297,8 +424,15 @@
     padding: 20px 0;
 }
 
-/* ══ Responsive ══ */
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+
 @media (max-width: 640px) {
+    .page {
+        padding: 16px 12px 48px;
+    }
+
     .grid {
         grid-template-columns: 1fr;
     }
@@ -315,10 +449,25 @@
     .headerCard {
         flex-wrap: wrap;
         gap: 16px;
+        padding: 22px 20px;
     }
 
     .headerActions {
         width: 100%;
+    }
+
+    .section {
+        padding: 22px 20px;
+    }
+
+    .actions {
+        padding: 16px 20px 24px;
+        flex-direction: column-reverse;
+    }
+
+    .grid3 {
+        grid-template-columns: 1fr;
+        gap: 12px;
     }
 }
 
@@ -326,21 +475,30 @@
     .headerCard {
         padding: 18px 16px;
     }
+
     .studentName {
         font-size: 1.2rem;
     }
+
     .feeStats,
     .attStats {
         grid-template-columns: repeat(2, 1fr);
     }
+
     .card {
         padding: 16px;
     }
+
     .detailRow {
         flex-direction: column;
         gap: 2px;
     }
+
     .detailLabel {
         white-space: normal;
+    }
+
+    .grid3 {
+        grid-template-columns: 1fr;
     }
 }

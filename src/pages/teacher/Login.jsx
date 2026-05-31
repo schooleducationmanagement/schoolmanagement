@@ -6,12 +6,16 @@ import cs from './Login.module.css'
 export default function TeacherLogin({ onLogin }) {
     const navigate = useNavigate()
     const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
 
     async function handleLogin() {
-        const trimmed = email.trim().toLowerCase()
-        if (!trimmed) { setError('Please enter your email address'); return }
+        const trimmedEmail = email.trim().toLowerCase()
+        const trimmedPass = password.trim()
+        
+        if (!trimmedEmail) { setError('Please enter your email address'); return }
+        if (!trimmedPass) { setError('Please enter your password'); return }
 
         setLoading(true)
         setError(null)
@@ -19,17 +23,22 @@ export default function TeacherLogin({ onLogin }) {
         const { data, error } = await supabase
             .from('teachers')
             .select(`
-        id, name, email, phone,
-        class_teacher_of,
-        classes ( name )
-      `)
-            .eq('email', trimmed)
+                id, name, email, phone, password,
+                class_teacher_of,
+                classes ( name )
+            `)
+            .eq('email', trimmedEmail)
             .single()
 
         setLoading(false)
 
         if (error || !data) {
             setError('No teacher account found with this email address.')
+            return
+        }
+
+        if (data.password !== trimmedPass) {
+            setError('Incorrect password. Please try again.')
             return
         }
 
@@ -58,6 +67,18 @@ export default function TeacherLogin({ onLogin }) {
                         onKeyDown={e => e.key === 'Enter' && handleLogin()}
                         placeholder="your.name@school.in"
                         autoFocus
+                    />
+                </div>
+
+                <div className={cs.field}>
+                    <label className={cs.label}>Password</label>
+                    <input
+                        className={cs.input}
+                        type="password"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        onKeyDown={e => e.key === 'Enter' && handleLogin()}
+                        placeholder="Enter your password"
                     />
                 </div>
 

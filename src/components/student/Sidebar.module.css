@@ -1,0 +1,239 @@
+/* ──────────────────────────────────────────────
+   Student Sidebar — Collapsible
+   (Blue theme)
+─────────────────────────────────────────────── */
+
+.sidebar {
+    width: 240px;
+    min-width: 240px;
+    height: 100vh;
+    background: #ffffff;
+    border-right: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: width 0.25s ease, min-width 0.25s ease;
+    position: relative;
+    z-index: 200;
+    flex-shrink: 0;
+}
+
+.sidebar.collapsed {
+    width: 64px;
+    min-width: 64px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 12px 16px;
+    border-bottom: 1px solid #f1f5f9;
+    min-height: 72px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logoIcon {
+    width: 34px;
+    height: 34px;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.logoText {
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+}
+
+.sidebar.collapsed .logoText {
+    opacity: 0;
+    width: 0;
+    pointer-events: none;
+}
+
+.logoName {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #3b82f6;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.logoSub {
+    font-size: 0.65rem;
+    color: #64748b;
+    margin-top: 1px;
+}
+
+.toggleBtn {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 7px;
+    color: #94a3b8;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.toggleBtn:hover {
+    background: #f1f5f9;
+    color: #3b82f6;
+}
+
+.studentCard {
+    padding: 14px 12px;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.studentInfo {
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+}
+
+.sidebar.collapsed .studentInfo {
+    opacity: 0;
+    width: 0;
+    pointer-events: none;
+}
+
+.studentName {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.studentRole {
+    font-size: 0.7rem;
+    color: #64748b;
+}
+
+.nav {
+    flex: 1;
+    padding: 10px 8px;
+    overflow-y: auto;
+}
+
+.section {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: #94a3b8;
+    padding: 14px 10px 5px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 9px 10px;
+    border-radius: 8px;
+    font-size: 0.855rem;
+    color: #475569;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.14s;
+}
+
+.item:hover {
+    background: #f8fafc;
+    color: #3b82f6;
+}
+
+.item.active {
+    background: rgba(59, 130, 246, 0.08);
+    color: #3b82f6;
+    font-weight: 600;
+}
+
+.icon {
+    font-size: 1rem;
+    width: 22px;
+    text-align: center;
+}
+
+.footer {
+    padding: 8px;
+    border-top: 1px solid #334155;
+}
+
+.logoutBtn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 8px;
+    font-size: 0.855rem;
+    color: #94a3b8;
+    cursor: pointer;
+    width: 100%;
+    background: none;
+    border: none;
+    transition: all 0.14s;
+}
+
+.logoutBtn:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.backdrop {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 260px !important;
+        transform: translateX(0);
+        z-index: 500;
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.45);
+    }
+
+    .sidebar.collapsed {
+        transform: translateX(-100%);
+    }
+
+    .backdrop {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+        z-index: 499;
+    }
+}
