@@ -145,6 +145,11 @@ export default function Dashboard() {
                     Teacher Page Redirect
                 </button>
             </div>
+            <div>
+                <button onClick={() => navigate("/student")}>
+                    Student Page Redirect
+                </button>
+            </div>
         </div>
     )
 }
