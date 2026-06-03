@@ -1,38 +1,77 @@
 .page {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 24px;
+    padding-bottom: 24px;
+}
+
+/* ── Greeting ── */
+.greeting {
+    margin-bottom: -4px;
+}
+
+.greetTitle {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 4px;
+}
+
+.greetSub {
+    font-size: 0.88rem;
+    color: #6b7280;
+    margin: 0;
 }
 
 /* ── Stat cards ── */
 .statsGrid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 14px;
 }
 
 .statCard {
     background: #fff;
     border: 1px solid #e5e7eb;
-    border-radius: 12px;
+    border-radius: 14px;
     padding: 18px 16px;
     cursor: pointer;
-    transition: box-shadow 0.15s, transform 0.15s;
-    text-align: center;
+    transition: box-shadow 0.2s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 14px;
 }
 
 .statCard:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.10);
+    transform: translateY(-3px);
+}
+
+.statIconWrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+}
+
+.statCard:hover .statIconWrap {
+    transform: scale(1.08);
 }
 
 .statIcon {
-    font-size: 1.4rem;
-    margin-bottom: 6px;
+    font-size: 1.25rem;
+}
+
+.statInfo {
+    min-width: 0;
 }
 
 .statVal {
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: #111827;
     line-height: 1;
@@ -41,149 +80,186 @@
 .statLabel {
     font-size: 0.75rem;
     color: #6b7280;
-    margin-top: 4px;
+    margin-top: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* ── Card ── */
-.card {
+/* ── Charts ── */
+.chartsRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.chartCard {
     background: #fff;
     border: 1px solid #e5e7eb;
-    border-radius: 12px;
+    border-radius: 14px;
     overflow: hidden;
 }
 
-.cardHeader {
+.chartHeader {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 18px 22px;
-    border-bottom: 1px solid #f3f4f6;
+    padding: 18px 22px 0;
 }
 
-.cardTitle {
+.chartTitle {
     font-size: 0.95rem;
     font-weight: 600;
     color: #111827;
     margin: 0;
 }
 
-.allDone {
-    font-size: 0.82rem;
-    color: #15803d;
-    background: #f0fdf4;
-    border: 1px solid #bbf7d0;
-    border-radius: 20px;
-    padding: 3px 10px;
-}
-
-/* ── Next step banner ── */
-.nextBanner {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 22px;
+.chartBadge {
+    font-size: 0.75rem;
+    color: #6366f1;
     background: #eef2ff;
-    border-bottom: 1px solid #e0e7ff;
-    font-size: 0.855rem;
-    color: #3730a3;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 500;
 }
 
-.nextBtn {
-    margin-left: auto;
-    padding: 5px 14px;
-    background: #4f46e5;
-    color: #fff;
-    border: none;
-    border-radius: 7px;
-    font-size: 0.82rem;
-    cursor: pointer;
-    transition: background 0.15s;
+.chartBody {
+    padding: 12px 10px 10px;
 }
 
-.nextBtn:hover {
-    background: #4338ca;
-}
-
-/* ── Steps ── */
-.steps {
-    padding: 8px 12px;
-}
-
-.step {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 12px 10px;
-    border-radius: 9px;
-    cursor: pointer;
-    transition: background 0.12s;
-    margin-bottom: 2px;
-}
-
-.step:hover {
-    background: #f9fafb;
-}
-
-.stepNum {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
+.emptyChart {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.8rem;
-    font-weight: 700;
+    height: 200px;
+    color: #9ca3af;
+    font-size: 0.88rem;
+}
+
+/* ── Fee donut layout ── */
+.feeDonutWrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.feeSummaryStats {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-right: 12px;
+}
+
+.feeStat {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.feeStatDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
     flex-shrink: 0;
 }
 
-.stepDone .stepNum {
-    background: #dcfce7;
-    color: #15803d;
-}
-
-.stepPending .stepNum {
-    background: #f3f4f6;
-    color: #6b7280;
-}
-
-.stepBody {
-    flex: 1;
-}
-
-.stepLabel {
-    font-size: 0.875rem;
-    font-weight: 500;
+.feeStatVal {
+    font-size: 1.05rem;
+    font-weight: 700;
     color: #111827;
 }
 
-.stepDone .stepLabel {
+.feeStatLabel {
+    font-size: 0.72rem;
     color: #6b7280;
-    text-decoration: line-through;
 }
 
-.stepHint {
-    font-size: 0.75rem;
-    color: #9ca3af;
-    margin-top: 1px;
+/* ── Custom tooltip ── */
+.customTooltip {
+    background: #fff;
+    border-radius: 10px;
+    padding: 12px 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    min-width: 140px;
 }
 
-.stepArrow {
-    font-size: 0.85rem;
-    color: #d1d5db;
+.tooltipTitle {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 6px;
 }
 
-.step:hover .stepArrow {
-    color: #4f46e5;
+.tooltipRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.78rem;
+    color: #374151;
+    padding: 2px 0;
+}
+
+.tooltipDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* ── Redirect buttons ── */
+.redirectRow {
+    display: flex;
+    gap: 14px;
+}
+
+.redirectBtn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.25);
+}
+
+.redirectBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
+}
+
+.redirectIcon {
+    font-size: 1.2rem;
 }
 
 /* ══ Responsive ══ */
+@media (max-width: 992px) {
+    .chartsRow {
+        grid-template-columns: 1fr;
+    }
+
+    .feeDonutWrap {
+        flex-direction: column;
+    }
+
+    .feeSummaryStats {
+        flex-direction: row;
+        padding: 0;
+    }
+}
+
 @media (max-width: 768px) {
     .statsGrid {
         grid-template-columns: repeat(3, 1fr);
     }
-    .cardHeader {
-        flex-wrap: wrap;
-        gap: 8px;
+
+    .redirectRow {
+        flex-direction: column;
     }
 }
 
@@ -191,13 +267,8 @@
     .statsGrid {
         grid-template-columns: repeat(2, 1fr);
     }
-    .nextBanner {
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-    .nextBtn {
-        margin-left: 0;
-        width: 100%;
-        text-align: center;
+
+    .greetTitle {
+        font-size: 1.3rem;
     }
 }
